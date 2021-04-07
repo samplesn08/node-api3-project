@@ -10,9 +10,17 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   // RETURN AN ARRAY WITH ALL THE USERS
+  Users.get()
+    .then(users => {
+      res.status(200).json(users);
+    })
+    .catch(err => {
+      res.status(500).json({ message: "Could not obtain Users data"})
+    })
 });
 
 router.get('/:id', (req, res) => {
+  const idVar = req.params.id;
   // RETURN THE USER OBJECT
   // this needs a middleware to verify user id
 });
@@ -45,3 +53,4 @@ router.post('/:id/posts', (req, res) => {
 });
 
 // do not forget to export the router
+module.exports = router;
